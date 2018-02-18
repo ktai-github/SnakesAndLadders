@@ -9,24 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "Player.h"
 
+static NSString * getUserInput() {
+  char userInput[10];
+  NSLog(@"Enter 'r' or 'roll' to roll dice.\n>");
+  fgets(userInput, 10, stdin);
+  NSString * userInputString = [NSString stringWithCString:userInput encoding:NSUTF8StringEncoding];
+  fpurge(stdin);
+  return userInputString;
+}
+
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    NSLog(@"Welcome to Snakes And Ladder!");
-//    int diceRoll = 0;
+    NSLog(@"Welcome to SNAKES AND LADDERS!");
     Player *player = [[Player alloc] init];
+
     while (TRUE) {
-      char userInput[10];
-      NSLog(@"Enter 'r' or 'roll' to roll dice.\n>");
-      fgets(userInput, 10, stdin);
-      NSString * userInputString = [NSString stringWithCString:userInput encoding:NSUTF8StringEncoding];
-      fpurge(stdin);
+      NSString * userInputString = getUserInput();
       if ([userInputString isEqualToString:@"r\n"] | [userInputString isEqualToString:@"roll\n"]) {
         player.roll;
-        
-      } else {
-        break;
       }
-      
     }
   }
   return 0;

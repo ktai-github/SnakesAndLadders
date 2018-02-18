@@ -10,20 +10,40 @@
 
 @implementation Player
 
-- (void) roll {
+static void rollDiceMovePlayer(Player *object) {
   int rolledValue = arc4random_uniform(6) + 1;
   NSLog(@"You rolled: %d", rolledValue);
+  //  self.currentSquare = 98;
+  object.currentSquare += rolledValue;
+}
+
+- (void) roll {
+  rollDiceMovePlayer(self);
   
-  self.currentSquare += rolledValue;
+  if (self.currentSquare > 99) {
+    self.gameOver = TRUE;
+    NSLog(@"You are at square 100! Game has ended.");
+    exit(0);
+  }
+  
+  NSLog ( @"You moved to: %ld", (long)self.currentSquare) ;
+  
   NSNumber *currentSquare = [NSNumber numberWithInteger:self.currentSquare];
-//  currentSquare = @4;
+
+  //check list of squares of snakes and ladders
   for (NSString *key in _gameLogic) {
+    
+    //get destination square of each snake or ladder
     id value = _gameLogic[key];
     
+    //if current square is a snake or ladder
     if ([currentSquare isEqualTo:key]) {
+      
+      //move to destination square
       currentSquare = value;
       self.currentSquare = [currentSquare integerValue];
       
+      //let user know they landed on a snake or ladder
       if (key < value) {
         NSLog(@"You landed on a ladder!");
         
@@ -31,18 +51,21 @@
         NSLog(@"You landed on a snake!");
       }
       
-      NSLog(@"You moved to: %@ from: %@", value, key);
+      NSLog(@"You moved from: %@ to: %@", key, value);
     }
   }
 
-  NSLog ( @"You moved to: %ld.", (long)self.currentSquare) ;
+
   }
 
 - (instancetype)init
 {
   self = [super init];
   if (self) {
+    self.gameOver = 0;
     self.currentSquare = 0;
+    
+    //dictionary of squares that has a snake or ladder its destination
     _gameLogic = @{
       //ladders
 //      @"4" : @"14",
