@@ -7,29 +7,22 @@
 //
 
 #import "Player.h"
-#import "PlayerManager.h"
+//#import "PlayerManager.h"
 
 @implementation Player
 
 static void rollDiceMovePlayer(Player *object) {
   int rolledValue = arc4random_uniform(6) + 1;
   NSLog(@"You rolled: %d", rolledValue);
-  //  self.currentSquare = 98;
+//  object.currentSquare = 98;
   object.currentSquare += rolledValue;
+  
 }
 
 - (void) roll {
   rollDiceMovePlayer(self);
   
-  if (self.currentSquare > 99) {
-    self.gameOver = TRUE;
-    NSLog(@"You are at square 100! Game has ended.");
-//    PlayerManager.players
-//    for (i = PlayerManager.players.Count; i > 0; i--) {
-//      PlayerManager.players.removeobjectatindex;
-//    }
-    exit(0);
-  }
+  
   
   NSLog ( @"You moved to: %ld", (long)self.currentSquare) ;
   

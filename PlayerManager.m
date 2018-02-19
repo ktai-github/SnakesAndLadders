@@ -7,7 +7,6 @@
 //
 
 #import "PlayerManager.h"
-//#import "Player.h"
 
 @implementation PlayerManager
 
@@ -19,12 +18,9 @@
     player.name = @"player1";
     NSLog(@"Created %@", player.name);
     self.players = [[NSMutableArray alloc] initWithObjects:player, nil];
-    
   }
   return self;
 }
-
-//- (NSString *)score:(int)right Wrong:(int)wrong;
 
 -(void) createPlayers : (int)numPlayers {
   if (numPlayers > 1) {
@@ -33,6 +29,7 @@
     for (int i = 0; i < (numPlayers - 1); i++) {
     
       Player *player = [[Player alloc] init];
+      
   //    player name is "playerX" where X >= 2 since player1 was created
       NSString *playerNumber = [NSString stringWithFormat:@"%i", i+2];
       player.name = @"player";
@@ -41,17 +38,25 @@
       [self.players addObject:player];
     
     }
-    
   }
 }
-//- (NSString *)score:(int)right Wrong:(int)wrong;
 
 - (int) currentPlayer{
+  //need to return player1 rather than player0
   return (self.currentIndex % self.players.count) + 1;
 }
 
 - (void) roll:(Player *)player {
   player.roll;
+  for (int i = 0; i < (self.players.count); i++) {
+    
+    Player *player = [self.players objectAtIndex:i];
+    NSLog(@"%@ is at square: %ld", player.name, (long)player.currentSquare);
+    
+  }
+  
+
+  
   self.currentIndex++;
 }
 
