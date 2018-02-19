@@ -7,6 +7,7 @@
 //
 
 #import "Player.h"
+#import "PlayerManager.h"
 
 @implementation Player
 
@@ -23,6 +24,10 @@ static void rollDiceMovePlayer(Player *object) {
   if (self.currentSquare > 99) {
     self.gameOver = TRUE;
     NSLog(@"You are at square 100! Game has ended.");
+//    PlayerManager.players
+//    for (i = PlayerManager.players.Count; i > 0; i--) {
+//      PlayerManager.players.removeobjectatindex;
+//    }
     exit(0);
   }
   
